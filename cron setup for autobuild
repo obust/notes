@@ -1,0 +1,3 @@
+
+# This script will run everyday at 1 am
+15 12 * * * root /home/scyfernn-build/builddocs.sh
