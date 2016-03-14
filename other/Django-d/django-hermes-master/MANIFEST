@@ -1,6 +1,0 @@
-setup.py
-hermes/__init__.py
-hermes/admin.py
-hermes/models.py
-hermes/urls.py
-hermes/views.py

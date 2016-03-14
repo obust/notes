@@ -1,8 +1,0 @@
-# Python
-*.pyc
-
-# emacs
-*~
-
-# ipython
-.ipynb_checkpoints
