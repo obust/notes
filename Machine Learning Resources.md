@@ -47,14 +47,13 @@ Others: http://deeplearning.net/software_links/
 
 ### Ladder Networks
 - [Deconstructing the Ladder Network Architecture](http://arxiv.org/abs/1511.06430)
-- [http://rinuboney.github.io/2016/01/19/ladder-network.html](http://rinuboney.github.io/2016/01/19/ladder-network.html)
+- [Introduction to Semi-Supervised Learning with Ladder Networks](http://rinuboney.github.io/2016/01/19/ladder-network.html)
 - [Original Paper: Semi-Supervised Learning with Ladder Networks](http://arxiv.org/abs/1507.02672)
 
 ### Reinforcement Learning
 - [Deep Reinforcement Learning Presentation](http://www.iclr.cc/lib/exe/fetch.php?media=iclr2015:silver-iclr2015.pdf)
 - [Playing Atari with Deep Reinforcement Learning](https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf)
 - [Demystifying Deep Reinforcement Learning](http://www.nervanasys.com/demystifying-deep-reinforcement-learning/)
-- []()
 - [Deep Q Learning Demo](https://cs.stanford.edu/people/karpathy/convnetjs/demo/rldemo.html)
 - [An Introduction to Reinforcement Learning](https://webdocs.cs.ualberta.ca/~sutton/book/ebook/the-book.html)
 
