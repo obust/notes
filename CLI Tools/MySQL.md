@@ -17,12 +17,13 @@ brew install mysql
 A "/etc/my.cnf" from another install may interfere with a Homebrew-built server starting up correctly.
 
 #### Linux installation
+https://www.linode.com/docs/databases/mysql/install-mysql-on-ubuntu-14-04
 
-    apt-get install mysql-server mysql-client
+    apt-get install mysql-server
 
 And maybe
 
-    apt-get install libmysqlclient-dev mysql-common
+    apt-get install mysql-client libmysqlclient-dev mysql-common
 
 #### To launch MySQL at startup (optional)
 
@@ -92,7 +93,7 @@ sudo rm -rf ~/usr/local/var/mysql
 ## MySQL Command-line
 
 
-### From the command line
+### Launch MySQL
 **MySQL list of commands**  
 `mysql help`
 
@@ -118,35 +119,76 @@ NB: To change mysql root password, see
 **Shut down server**  
 `mysql stop` or `mysql.server stop`
 
-### From a MySQL prompt
+### MySQL Commands
 NB: When you see `mysql>` it means from a MySQL prompt after logging into MySQL. More on [here](https://www.pantz.org/software/mysql/mysqlcommands.html).
 
-**Create a database on the sql server** (specify all tables and columns will use UTF-8 by default)  
+#### Manage Users
+https://www.digitalocean.com/community/tutorials/how-to-create-a-new-user-and-grant-permissions-in-mysql
+
+**List all users**  
+`mysql> SELECT User, Host FROM mysql.user;`
+
+**Create a user**  
+`mysql> CREATE USER '<username>'@'<host>' IDENTIFIED BY '<password>';`
+
+Where `<host>` is :
+- `%` : wildcard interpreted as "any" host.
+- `localhost`
+- `123.4.5.6`
+- `domain.com`
+
+**Grant privileges to a user**  
+`mysql> GRANT <privilege> ON <dbname>.<tablename> TO '<username>'@'<host>';`
+
+Where `<privilege>` is :
+- `ALL PRIVILEGES` : allows user all access to a designated database (or if no database is selected, across the system)
+- `CREATE` : allows user to create new tables or databases
+- `DROP` : allows user to delete tables or databases
+- `DELETE` : allows user to delete rows from tables
+- `INSERT` : allows user to insert rows into tables
+- `SELECT` : allows user to use the SELECT command to read through databases
+- `UPDATE` : allow user to update table rows
+- `GRANT OPTION` : allows user to grant or remove other users' privileges
+
+**Show privileges for a user**  
+`mysql> SHOW GRANTS FOR '<username>'@'<host>';`
+
+**Revoke privileges to a user**  
+`mysql> REVOKE <privilege> ON <dbname>.* TO '<username>'@'<host>';`
+
+**Delete a user**  
+`mysql> DROP USER '<username>'@'<host>';`
+
+#### Manage Databases
+
+**List all databases**  
+`mysql> SHOW DATABASES;`
+
+**Create a database** (specify all tables and columns will use UTF-8 by default)  
 `mysql> CREATE DATABASE <dbname> CHARACTER SET utf8;`
 
-**List all databases on the sql server**  
-`mysql> SHOW DATABASES;`
+**Delete a database**  
+`mysql> DROP DATABASE <dbname>;`
 
 **Switch to a database**  
 `mysql> USE <dbname>;`
 
-**To see all the tables in the db**  
+#### Manage Tables
+
+**List all the tables in the db**  
 `mysql> SHOW TABLES;`
 
-**To see database's field formats**  
+**See database's field formats**  
 `mysql> DESCRIBE <tablename>;`
 
-**To see the columns and column information of a table**  
-`mysql> show columns from <tablename>;`
+**See the columns and column information of a table**  
+`mysql> SHOW COLUMNS FROM <tablename>;`
 
-**To see the first entries of a table**  
+**See the first entries of a table**  
 `mysql> SELECT * FROM <tablename> LIMIT 5;`
 
-**To delete a db**  
-`mysql> DROP DATABASE <dbname>;`
-
-**To delete a table**  
+**Delete a table**  
 `mysql> DROP TABLE <tablename>;`
 
-**To clear a table (remove all entries)**
+**Clear a table (remove all entries)**
 `mysql> TRUNCATE TABLE <tablename>;`

@@ -1,5 +1,6 @@
 # Cron
 
+http://www.sitepoint.com/a-comprehensive-crash-course-into-cronjobs/
 http://www.unixgeeks.org/security/newbie/unix/cron-1.html
 https://help.ubuntu.com/community/CronHowto
 http://www.cyberciti.biz/faq/how-do-i-add-jobs-to-cron-under-linux-or-unix-oses/

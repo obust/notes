@@ -55,7 +55,7 @@ Others: http://deeplearning.net/software_links/
 - [Playing Atari with Deep Reinforcement Learning](https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf)
 - [Demystifying Deep Reinforcement Learning](http://www.nervanasys.com/demystifying-deep-reinforcement-learning/)
 - [Deep Q Learning Demo](https://cs.stanford.edu/people/karpathy/convnetjs/demo/rldemo.html)
-- [An Introduction to Reinforcement Learning](https://webdocs.cs.ualberta.ca/~sutton/book/ebook/the-book.html)
+- [An Introduction to Reinforcement Learning  (Sutton & Barto, 1998)](https://webdocs.cs.ualberta.ca/~sutton/book/ebook/the-book.html)
 
 ### Autoencoder
 incoming
