@@ -6,6 +6,8 @@ ex: Grunt, Gulp, Browser-Sync, Plumber, etc.
 
 https://www.digitalocean.com/community/tutorials/how-to-use-npm-to-manage-node-js-packages-on-a-linux-server
 
+http://www.sitepoint.com/beginners-guide-node-package-manager/
+
 ## Install npm
 
 ### Requirements
