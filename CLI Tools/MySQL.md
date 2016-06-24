@@ -4,28 +4,34 @@
 2. [Uninstall MySQL](#-uninstall-mysql)
 3. [MySQL Command-line]()
 
-## Install MySQL  
+## Install MySQL
 
-#### Mac installation
+### Mac installation
+
 Use Homebrew to install mysql
 
 ```
 brew install mysql
 ```
 
-***Potential Issue***  
-A "/etc/my.cnf" from another install may interfere with a Homebrew-built server starting up correctly.
+**_Potential Issue_**  
+A `/etc/my.cnf` from another install may interfere with a Homebrew-built server starting up correctly.
 
-#### Linux installation
-https://www.linode.com/docs/databases/mysql/install-mysql-on-ubuntu-14-04
+### Linux installation
 
-    apt-get install mysql-server
+<https://www.linode.com/docs/databases/mysql/install-mysql-on-ubuntu-14-04>
+
+```
+apt-get install mysql-server
+```
 
 And maybe
 
-    apt-get install mysql-client libmysqlclient-dev mysql-common
+```
+apt-get install mysql-client libmysqlclient-dev mysql-common
+```
 
-#### To launch MySQL at startup (optional)
+### To launch MySQL at startup (optional)
 
 1. add MySQL to your LaunchAgents
 2. load MySQL specified configuration files
@@ -36,30 +42,28 @@ launchctl load ~/Library/LaunchAgents homebrew.mxcl.mysql.plist
 ```
 
 #### To set the root password for MySQL
-Set the root password to *root* as well. See
-[here](https://www.howtoforge.com/setting-changing-resetting-mysql-root-passwords) or
-[here](http://www.cyberciti.biz/faq/mysql-change-root-password/)
+
+Set the root password to _root_ as well. See [here](https://www.howtoforge.com/setting-changing-resetting-mysql-root-passwords) or [here](http://www.cyberciti.biz/faq/mysql-change-root-password/)
 
 ```
 mysqladmin -u root password <newpassword>
 ```
 
-#### Install mysqlclient  
+#### Install mysqlclient
+
 [mysqlclient](https://github.com/PyMySQL/mysqlclient-python) is a Database API driver for Python : used to access databases.
 
 ```
 pip install mysqlclient
 ```
 
-#### Potential Issue
-When running mysqlclient, might fail loading some libraries
-`Library not loaded: libssl.1.0.0.dylib`  
-or  
-`Library not loaded: libcrypto.1.0.0.dylib`
+# Potential Issue
+
+When running mysqlclient, might fail loading some libraries `Library not loaded: libssl.1.0.0.dylib` or `Library not loaded: libcrypto.1.0.0.dylib`
 
 The libraries aren't loaded because the versions aren't in the main lib directory `/usr/lib/` but in anaconda `/Applications/anaconda/lib/`
 
-Solution from [here](http://stackoverflow.com/questions/27264574/import-psycopg2-library-not-loaded-libssl-1-0-0-dylib)  
+Solution from [here](http://stackoverflow.com/questions/27264574/import-psycopg2-library-not-loaded-libssl-1-0-0-dylib)
 
 1. Remove potential incorrect links
 2. Add [simlink](https://en.wikipedia.org/wiki/Symbolic_link) (raccourci) to the versions stored in anaconda
@@ -73,6 +77,7 @@ sudo ln -s /Applications/anaconda/lib/libcrypto.1.0.0.dylib /usr/lib
 ```
 
 ## Uninstall MySQL
+
 See this [post](http://stackoverflow.com/questions/4359131/brew-install-mysql-on-mac-os).
 
 1. Remove MySQL
@@ -89,11 +94,10 @@ rm ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
 sudo rm -rf ~/usr/local/var/mysql
 ```
 
-
 ## MySQL Command-line
 
-
 ### Launch MySQL
+
 **MySQL list of commands**  
 `mysql help`
 
@@ -102,16 +106,15 @@ sudo rm -rf ~/usr/local/var/mysql
 
 **Connect/Login**
 
-* hostname: -h \<localhost> (optional)
-* username: -u \<root>
-* password: -p \<>
+- hostname: -h (optional)
+- username: -u
+- password: -p
 
 ```
 mysql -u <username> -p
-```  
-NB: To change mysql root password, see
-[here](https://www.howtoforge.com/setting-changing-resetting-mysql-root-passwords) or
-[here](http://www.cyberciti.biz/faq/mysql-change-root-password/).
+```
+
+NB: To change mysql root password, see [here](https://www.howtoforge.com/setting-changing-resetting-mysql-root-passwords) or [here](http://www.cyberciti.biz/faq/mysql-change-root-password/).
 
 **Disconnect**  
 `>mysql QUIT` or `Ctrl+C`
@@ -120,9 +123,11 @@ NB: To change mysql root password, see
 `mysql stop` or `mysql.server stop`
 
 ### MySQL Commands
+
 NB: When you see `mysql>` it means from a MySQL prompt after logging into MySQL. More on [here](https://www.pantz.org/software/mysql/mysqlcommands.html).
 
 #### Manage Users
+
 https://www.digitalocean.com/community/tutorials/how-to-create-a-new-user-and-grant-permissions-in-mysql
 
 **List all users**  
@@ -132,6 +137,7 @@ https://www.digitalocean.com/community/tutorials/how-to-create-a-new-user-and-gr
 `mysql> CREATE USER '<username>'@'<host>' IDENTIFIED BY '<password>';`
 
 Where `<host>` is :
+
 - `%` : wildcard interpreted as "any" host.
 - `localhost`
 - `123.4.5.6`
@@ -141,6 +147,7 @@ Where `<host>` is :
 `mysql> GRANT <privilege> ON <dbname>.<tablename> TO '<username>'@'<host>';`
 
 Where `<privilege>` is :
+
 - `ALL PRIVILEGES` : allows user all access to a designated database (or if no database is selected, across the system)
 - `CREATE` : allows user to create new tables or databases
 - `DROP` : allows user to delete tables or databases
@@ -190,5 +197,5 @@ Where `<privilege>` is :
 **Delete a table**  
 `mysql> DROP TABLE <tablename>;`
 
-**Clear a table (remove all entries)**
+**Clear a table (remove all entries)**  
 `mysql> TRUNCATE TABLE <tablename>;`
