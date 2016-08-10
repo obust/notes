@@ -22,23 +22,13 @@ A `/etc/my.cnf` from another install may interfere with a Homebrew-built server 
 <https://www.linode.com/docs/databases/mysql/install-mysql-on-ubuntu-14-04>
 
 ```
-apt-get install mysql-server
+apt install mysql-server
 ```
 
 And maybe
 
 ```
-apt-get install mysql-client libmysqlclient-dev mysql-common
-```
-
-### To launch MySQL at startup (optional)
-
-1. add MySQL to your LaunchAgents
-2. load MySQL specified configuration files
-
-```
-ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
-launchctl load ~/Library/LaunchAgents homebrew.mxcl.mysql.plist
+apt install mysql-client libmysqlclient-dev mysql-common
 ```
 
 #### To set the root password for MySQL
@@ -57,23 +47,12 @@ mysqladmin -u root password <newpassword>
 pip install mysqlclient
 ```
 
-# Potential Issue
+#### Secure installation
 
-When running mysqlclient, might fail loading some libraries `Library not loaded: libssl.1.0.0.dylib` or `Library not loaded: libcrypto.1.0.0.dylib`
-
-The libraries aren't loaded because the versions aren't in the main lib directory `/usr/lib/` but in anaconda `/Applications/anaconda/lib/`
-
-Solution from [here](http://stackoverflow.com/questions/27264574/import-psycopg2-library-not-loaded-libssl-1-0-0-dylib)
-
-1. Remove potential incorrect links
-2. Add [simlink](https://en.wikipedia.org/wiki/Symbolic_link) (raccourci) to the versions stored in anaconda
+Launch a interface to setup mysql for production purposes.
 
 ```
-sudo rm /usr/lib/libssl.1.0.0.dylib
-sudo rm /usr/lib/libcrypto.1.0.0.dylib
-
-sudo ln -s /Applications/anaconda/lib/libssl.1.0.0.dylib /usr/lib
-sudo ln -s /Applications/anaconda/lib/libcrypto.1.0.0.dylib /usr/lib
+sudo mysql_secure_installation
 ```
 
 ## Uninstall MySQL
