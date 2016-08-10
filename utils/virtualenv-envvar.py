@@ -89,14 +89,8 @@ def main(django_settings_module=False):
     if django_settings_module:
         script += "unset DJANGO_SETTINGS_MODULE"
 
-    print('About to write to {}:\n\n{}\n\n'.format(POSTDEACTIVATE_FILE, script))
-    response = raw_input('Is this ok? (yes) ')
-    if response == '' or response == 'yes':
-        with open(POSTDEACTIVATE_FILE, mode='w') as f:
-            f.write(script)
-    else:
-        print('Exiting utility.')
-        return
+    with open(POSTDEACTIVATE_FILE, mode='w') as f:
+        f.write(script)
 
     # 3. Re-activate virtualenv
     execfile(ACTIVATE_THIS_FILE, dict(__file__=ACTIVATE_THIS_FILE))
