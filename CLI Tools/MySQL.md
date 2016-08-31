@@ -1,28 +1,13 @@
-# MySQL Commands
+# MySQL
 
-1. [Install MySQL](#-install-mysql)
-2. [Uninstall MySQL](#-uninstall-mysql)
-3. [MySQL Command-line]()
 
-## Install MySQL
 
-### Mac installation
-
-Use Homebrew to install mysql
-
-```
-brew install mysql
-```
-
-**_Potential Issue_**  
-A `/etc/my.cnf` from another install may interfere with a Homebrew-built server starting up correctly.
-
-### Linux installation
+## Installation
 
 <https://www.linode.com/docs/databases/mysql/install-mysql-on-ubuntu-14-04>
 
 ```
-apt install mysql-server
+sudo apt install mysql-server
 ```
 
 And maybe
@@ -31,7 +16,7 @@ And maybe
 apt install mysql-client libmysqlclient-dev mysql-common
 ```
 
-#### To set the root password for MySQL
+### Set the root password for MySQL
 
 Set the root password to _root_ as well. See [here](https://www.howtoforge.com/setting-changing-resetting-mysql-root-passwords) or [here](http://www.cyberciti.biz/faq/mysql-change-root-password/)
 
@@ -39,7 +24,7 @@ Set the root password to _root_ as well. See [here](https://www.howtoforge.com/s
 mysqladmin -u root password <newpassword>
 ```
 
-#### Install mysqlclient
+### Install mysqlclient
 
 [mysqlclient](https://github.com/PyMySQL/mysqlclient-python) is a Database API driver for Python : used to access databases.
 
@@ -47,33 +32,15 @@ mysqladmin -u root password <newpassword>
 pip install mysqlclient
 ```
 
-#### Secure installation
+### Secure installation
 
-Launch a interface to setup mysql for production purposes.
+Launch a utility to setup mysql for production purposes.
 
 ```
 sudo mysql_secure_installation
 ```
 
-## Uninstall MySQL
-
-See this [post](http://stackoverflow.com/questions/4359131/brew-install-mysql-on-mac-os).
-
-1. Remove MySQL
-2. Cleanup cache
-3. Remove MySQL specified configuration files from LaunchAgents
-4. Remove MySQL from LaunchAgents
-5. Delete old MySQL directory (otherwise future mysql installation will not be able to log in as root initially to set the password)
-
-```
-brew remove mysql
-brew cleanup
-launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
-rm ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
-sudo rm -rf ~/usr/local/var/mysql
-```
-
-## MySQL Command-line
+## Command-Line Int
 
 ### Launch MySQL
 

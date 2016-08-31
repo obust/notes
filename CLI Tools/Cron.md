@@ -13,6 +13,20 @@ It is normally used for sys admin commands, like makewhatis, which builds a sear
 
 This file will look at Vixie Cron, a version of cron authored by Paul Vixie.
 
+<!-- TOC depthFrom:2 depthTo:7 withLinks:1 updateOnSave:1 orderedList:1 -->
+
+1. [How to start Cron](#how-to-start-cron)
+2. [Using cron](#using-cron)
+	1. [crontabs](#crontabs)
+		1. [User crontabs](#user-crontabs)
+		2. [System wide /etc/crontab and /etc/cron.d fragments](#system-wide-etccrontab-and-etccrond-fragments)
+3. [Multiuser cron](#multiuser-cron)
+	1. [Edit crontab using terminal editor](#edit-crontab-using-terminal-editor)
+	2. [Edit crontab](#edit-crontab)
+	3. [Contab job not running](#contab-job-not-running)
+
+<!-- /TOC -->
+
 ## How to start Cron
 
 Cron is a daemon, which means that it only needs to be started once, and will lay dormant until it is required. A Web server is a daemon, it stays dormant until it gets asked for a web page. The cron daemon, or crond, **stays dormant until a time specified** in one of the config files, or crontabs.
@@ -73,26 +87,28 @@ The fields specify when to run the command :
 
 `<minute> <hour> <dom> <month> <dow> <user> <cmd>`
 
-##### User crontabs
+#### User crontabs
+
 ```
 * * * * *  <command to be executed>
-| | | | |
-| | | | ----- day of week (0-7) (Sunday=0 or 7)
-| | | ------- month (1-12) OR jan,feb,mar,apr ...
-| | --------- day of month (1-31)
-| ----------- hour (0-23)
-------------- minute (0-59)
+│ │ │ │ │
+│ │ │ │ └──── day of week (0-7) (Sunday=0 or 7)
+│ │ │ └────── month (1-12) OR jan,feb,mar,apr ...
+│ │ └──────── day of month (1-31)
+│ └────────── hour (0-23)
+└──────────── minute (0-59)
 ```
-##### System wide /etc/crontab and /etc/cron.d fragments
+
+#### System wide /etc/crontab and /etc/cron.d fragments
 
 ```
 * * * * *  <username> <command to be executed>
-| | | | |
-| | | | ----- day of week (0-7) (Sunday=0 or 7)
-| | | ------- month (1-12) OR jan,feb,mar,apr ...
-| | --------- day of month (1-31)
-| ----------- hour (0-23)
-------------- minute (0-59)
+│ │ │ │ │
+│ │ │ │ └──── day of week (0-7) (Sunday=0 or 7)
+│ │ │ └────── month (1-12) OR jan,feb,mar,apr ...
+│ │ └──────── day of month (1-31)
+│ └────────── hour (0-23)
+└──────────── minute (0-59)
 ```
 
 - `minute` : what minute of the hour the command will run on (between 0 and 59)
@@ -165,61 +181,6 @@ Privileged users can also change other user's crontab with:
 and then following it with either the name of a file to replace the
 existing user's crontab, or one of the -e, -l or -r options.
 
-## Controlling Access to cron
-
-Cron has a built in feature of allowing you to specify who may, and who
-may not use it. It does this by the use of /etc/cron.allow and /etc/cron.deny
-files. These files work the same way as the allow/deny files for other
-daemons do. To stop a user using cron, just put their name in cron.deny, to
-allow a user put their name in the cron.allow. If you wanted to prevent all
-users from using cron, you could add the line ALL to the cron.deny file:
-
-root@pingu # echo ALL >>/etc/cron.deny
-
-If you want user cog to be able to use cron, you would add the line cog
-to the cron.allow file:
-
-root@pingu # echo cog >>/etc/cron.allow
-
-If there is neither a cron.allow nor a cron.deny file, then the use of cron
-is unrestricted (i.e. every user can use it).  If you were to put the name of
-some users into the cron.allow file, without creating a cron.deny file, it
-would have the same effect as creating a cron.deny file with ALL in it.
-This means that any subsequent users that require cron access should be
-put in to the cron.allow file.  
-
-Output from cron
-
-As I've said before, the output from cron gets mailed to the owner of the
-process, or the person specified in the MAILTO variable, but what if you
-don't want that? If you want to mail the output to someone else, you can
-just pipe the output to the command mail.
-e.g.
-
-cmd | mail -s "Subject of mail" user
-
-If you wish to mail the output to someone not located on the machine, in the
-above example, substitute user for the email address of the person who
-wishes to receive the output.
-
-If you have a command that is run often, and you don't want to be emailed
-the output every time, you can redirect the output to a log file (or
-/dev/null, if you really don't want the output).
-e,g
-
-cmd >> log.file
-
-Notice we're using two > signs so that the output appends the log file and
-doesn't clobber previous output.
-The above example only redirects the standard output, not the standard error,
-if you want all output stored in the log file, this should do the trick:
-
-cmd >> logfile 2>&1
-
-You can then set up a cron job that mails you the contents of the file at
-specified time intervals, using the cmd:
-
-mail -s "logfile for cmd" <log.file
 
 ### Contab job not running
 
