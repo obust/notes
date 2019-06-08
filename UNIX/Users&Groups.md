@@ -1,6 +1,6 @@
 # Unix Users & Groups
 
-https://www.linode.com/docs/tools-reference/linux-users-and-groups  
+https://www.linode.com/docs/tools-reference/linux-users-and-groups
 http://www.tecmint.com/manage-users-and-groups-in-linux/
 
 <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:1 -->
@@ -14,19 +14,19 @@ http://www.tecmint.com/manage-users-and-groups-in-linux/
 
 ## Manage Users
 
-**Create user (interface)**  
+**Create user (interface)**
 `adduser <username>`
 
 - `--home <dir>`: home directory of the new account.
 - `--group <groupname>`: name of the primary group of the new account.
 
-**Delete user**  
+**Delete user**
 `deluser <username>`
 
 - `--remove-home`: remove the users home directory and mail spool.
 - `--remove-all-files`: remove all files owned by user.
 
-**List users**  
+**List users**
 
 The full account information is stored in the `/etc/passwd` file. This file contains a record per system user account and has the following format (fields are delimited by a colon).
 ```
@@ -39,28 +39,28 @@ The full account information is stored in the `/etc/passwd` file. This file cont
 - The `[Home directory]` indicates the absolute path to `[username]`’s home directory, and
 - The `[Default shell]` is the shell that will be made available to this user when he or she logins the system.
 
-**Change user password**  
+**Change user password**
 `passwd <username>`
 
-**Change user name**  
+**Change user name**
 `usermod -l <new_username> <old_username>`
 
-**Change user home directory**  
+**Change user home directory**
 `usermod [-m] -d <new_home_dir> <username>`
 - `-m` (`--move-home`) : move the content of the current home dir to the new home dir.
 
 ## Manage Groups
 
-**Create group**  
+**Create group**
 `addgroup <groupname>`
 
 - `--gid <ID>`: use ID for the new group.
 - `--system`: create a system group.
 
-**Delete group**  
+**Delete group**
 `delgroup <groupname>`
 
-**List groups**  
+**List groups**
 Group information is stored in the `/etc/group` file. Each record has the following format.
 
 ```
@@ -73,33 +73,22 @@ Group information is stored in the `/etc/group` file. Each record has the follow
 
 ## Manage Group Users
 
-**Set user primary group**  
+**Set user primary group**
 `usermod -g <groupname> <username>`
 
-**Set user supplementary groups**  
+**Set user supplementary groups**
 `usermod -G <group1>,<group2> <username>`
 
-**Append supplementary group**  
+**Append supplementary group**
 `usermod -a -G <group1>,<group2> <username>`
 
-**List user groups**  
+**List user groups**
 `groups <username>`
 
-**Remove user from group**  
+**Remove user from group**
 `deluser <username> <groupname>`
 
 ## Grant sudo rights
 
-Use the `visudo` command as a sudo user to change sudoers.
-
-Before:
-```
-# User privilege specification
-root       ALL=(ALL:ALL) ALL
-```
-After:
-```
-# User privilege specification
-root       ALL=(ALL:ALL) ALL
-<username> ALL=(ALL:ALL) ALL
-```
+**Add user to group "sudo"**
+`adduser <username> sudo`
