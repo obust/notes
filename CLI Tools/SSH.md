@@ -2,8 +2,8 @@
 
 SSH, or Secure Shell, is a protocol used to securely log onto remote systems.
 
-https://www.digitalocean.com/community/tutorials/how-to-use-ssh-to-connect-to-a-remote-server-in-ubuntu  
-https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2  
+https://www.digitalocean.com/community/tutorials/how-to-use-ssh-to-connect-to-a-remote-server-in-ubuntu
+https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2
 https://www.digitalocean.com/community/tutorials/how-to-configure-custom-connection-options-for-your-ssh-client
 
 <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:1 -->
@@ -27,7 +27,7 @@ ssh <username>@<remote-host>
 Password:
 ```
 
-**Log out**:  
+**Log out**:
 ```
 exit
 ```
@@ -41,7 +41,7 @@ Key-based authentication works by creating a pair of keys:
 - The **private key** is located on the client machine and is secured and kept secret.
 - The **public key** is given to any remote server you wish to access.
 
-When you attempt to connect using a key-pair, the server will use the public key to create a message for the client computer that can only be read with the private key.  
+When you attempt to connect using a key-pair, the server will use the public key to create a message for the client computer that can only be read with the private key.
 The client computer then sends the appropriate response back to the server and the server will know that the client is legitimate.
 
 
@@ -51,10 +51,10 @@ The client computer then sends the appropriate response back to the server and t
 ssh-keygen -t rsa
 ```
 
-The public key is now located in `/home/demo/.ssh/id_rsa.pub`.  
+The public key is now located in `/home/demo/.ssh/id_rsa.pub`.
 The private key is now located in `/home/demo/.ssh/id_rsa`.
 
-**Using a passphrase**  
+**Using a passphrase**
 It's up to you whether you want to use a passphrase.
 
 `Enter passphrase (empty for no passphrase):`
@@ -63,17 +63,17 @@ Should a passphrase-protected private key fall into an unauthorized users posses
 
 ### Transfer the Public Key
 
-```
+```sh
 ssh-copy-id <username>@<remote-host>
 ```
 
-The public key is copied in `~/.ssh/authorized_keys` on the remote server.
+Your local public key (`~/.ssh/id_rsa.pub` file) is copied to the remote server's authorized keys (`~/.ssh/authorized_keys` directory).
 
-Now you can go ahead and log into `<username>@<remote-host>` and you will not be prompted for a password. However, if you set a passphrase, you will be asked to enter the passphrase at that time (and whenever else you log in in the future).
+Now you can go ahead and login `ssh <username>@<remote-host>` and you will not be prompted for a password. However, if you set a passphrase, you will be asked to enter the passphrase at that time (and whenever else you log in in the future).
 
 ## SSH Config File
 
-Use the SSH config file at `~/.ssh/config` to **provide customized client-side connection options**.  
+Use the SSH config file at `~/.ssh/config` to **provide customized client-side connection options**.
 These can be saved to a configuration file that can be used to define per-host values. This can help keep the different connection options you use for each host separated and organized.
 
 ### Configuratin File Structure
