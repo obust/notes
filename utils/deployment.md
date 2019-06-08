@@ -22,7 +22,7 @@ touch post-receive
 chmod +x post-receive
 nano post-receive
 #!/bin/sh
-git --work-tree=/var/www/<site> --git-dir=/var/repo/<site>.git
+git --git-dir=/var/repo/<site>.git --work-tree=/var/www/<site> checkout -f
 ```
 
 ```
